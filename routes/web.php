@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ActiveTasksController;
+use App\Http\Controllers\ComplitedTaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +22,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::middleware('auth')->group(function (){
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/activeTasks', [ActiveTasksController::class, 'index']);
+    Route::get('/completedTasks', [ComplitedTaskController::class, 'index']);
+    Route::get('/addTask',[ActiveTasksController::class, 'create'])->name('addTask');
+});

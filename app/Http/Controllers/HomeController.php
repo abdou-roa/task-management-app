@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use auth;
+use App\Models\Tasks;
 use Illuminate\Http\Request;
+use App\Models\complitedTask;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        //$activeTasks = complitedTask::all();
+        $activeTasks = DB::table('tasks')
+                                        ->where('user_id', Auth::id())
+                                        ->get();
+        //$completedTasks = Tasks::all();
+        $completedTasks = DB::table('complited_tasks')
+                                                    ->where('user_id', Auth::id())
+                                                    ->get();
+        $all = true;
+        $active = false;
+        $completed = false;
+        return view('home')
+        ->with('complitedTasks',$completedTasks)
+        ->with('activeTasks', $activeTasks)
+        ->with('all', $all)
+        ->with('active', $active)
+        ->with('completed', $completed);
     }
 }
