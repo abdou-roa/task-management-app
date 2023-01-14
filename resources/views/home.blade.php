@@ -19,13 +19,13 @@
                       <div class="card">
                         <div class="card-body p-5">
               
-                          <form class="d-flex flex-column  align-items-center mb-4" action="{{route('addTask')}}" method="GET">
-                            <div class="d-flex w-75">
-                              <input type="text" id="form2" class="form-control" name="TaskName" style="min-width:200px;" />
-                              <button type="submit" class="btn btn-info ms-2">Add</button>
-                            </div>
-                            <label class="form-label" for="form2">New task...</label>
-                        </form>
+                            <form class="d-flex flex-column  align-items-center mb-4" action="{{route('addTask')}}" method="GET">
+                                <div class="d-flex w-75">
+                                <input type="text" id="form2" class="form-control" name="TaskName" style="min-width:200px;" />
+                                <button type="submit" class="btn btn-info ms-2">Add</button>
+                                </div>
+                                <label class="form-label" for="form2">New task...</label>
+                            </form>
               
                           <!-- Tabs navs -->
                           <ul class="nav nav-tabs mb-4 pb-2" id="ex1" role="tablist">
@@ -54,39 +54,43 @@
 
                                 <!-- showing all the active tasks first -->
                                     @foreach ($activeTasks as $activeTask)
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$activeTask->task_name}}
+                                <div>                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                        {{$activeTask->task_name}}</div>
+                                        <a href="{{route("taskDetail", $activeTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
                                     @endforeach
 
                                     <!-- showing all the complited tasks -->
                                     @foreach ($complitedTasks as $compliteTask)
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$compliteTask->task_name}}
+                                        <div>                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                        {{$compliteTask->task_name}}</div>
+                                        <a href=" {{route("taskDetail", $complitedTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
                                     @endforeach
 
                                 <!--showing all active tasks -->
                                @elseif(!$all && $active && !$completed)
                                     @foreach ($activeTasks as $activeTask)
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$activeTask->task_name}}
+                                        <div>                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                        {{$activeTask->task_name}}</div>
+                                        <a href="{{route("taskDetail", $activeTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
                                     @endforeach
 
 
                                @elseif(!$all && !$active && $completed)
                                     @foreach ($completedTasks as $completedTask)
-                                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$completedTask->task_name}}
+                                        <div>                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                        {{$completedTask->task_name}}</div>
+                                        <a href="{{route("taskDetail", $completedTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
                                     @endforeach
 

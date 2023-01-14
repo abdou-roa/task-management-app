@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ActiveTasksController;
+use App\Http\Controllers\taskDetailsController;
 use App\Http\Controllers\ComplitedTaskController;
 
 /*
@@ -28,4 +29,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/activeTasks', [ActiveTasksController::class, 'index']);
     Route::get('/completedTasks', [ComplitedTaskController::class, 'index']);
     Route::get('/addTask',[ActiveTasksController::class, 'create'])->name('addTask');
+    Route::post('/storeTask',[ActiveTasksController::class, 'store'])->name('storeTask');
+    Route::get('/taskDetail/{id}',[taskDetailsController::class, 'show'])->name('taskDetail');
+    Route::post('/updateTask/{id}', [taskDetailsController::class, 'update'])->name('updateTask');
 });

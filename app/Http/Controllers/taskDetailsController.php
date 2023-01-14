@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Tasks;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class ActiveTasksController extends Controller
+class taskDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,21 +15,8 @@ class ActiveTasksController extends Controller
      */
     public function index()
     {
-        //withthis function  i will return all the active tasks an pass them to the home view
-
-        $activeTaks = DB::table('tasks')
-                                        ->where('user_id', Auth::id())
-                                        ->where('is_completed', false)
-                                        ->get();
-
-        $all = false;
-        $active = true;
-        $completed = false;
-        return view('home')
-        ->with('activeTasks',$activeTaks)
-        ->with('all', $all)
-        ->with('active', $active)
-        ->with('completed', $completed);
+        //
+        
     }
 
     /**
@@ -38,11 +24,9 @@ class ActiveTasksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        // taking the task name then redirecting to another page when more details about the task are added
-        $taskName = $request->TaskName;
-        return view('addTask')->with('taskName', $taskName);
+        //
     }
 
     /**
@@ -53,13 +37,7 @@ class ActiveTasksController extends Controller
      */
     public function store(Request $request)
     {
-        // add task name, user_id and task details
-        $task = new Tasks;
-        $task->user_id = Auth::id();
-        $task->task_name = $request->taskName;
-        $task->task_details = $request->taskDetails;
-        $task->save();
-        return redirect()->route('home');
+        //
     }
 
     /**
@@ -71,6 +49,8 @@ class ActiveTasksController extends Controller
     public function show($id)
     {
         //
+        $task = Tasks::find($id);
+        return view('taskDetails')->with('task', $task);
     }
 
     /**
@@ -94,6 +74,12 @@ class ActiveTasksController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $task = Tasks::find($id);
+        $task->user_id = Auth::id();
+        $task->task_name = $request->taskName;
+        $task->task_details = $request->taskDetails;
+        $task->save();
+        return redirect()->route('home');
     }
 
     /**
