@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
+            $table->integer('id');
             $table->integer('user_id');
             $table->string('task_name');
             $table->string('task_details');

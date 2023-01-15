@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function (){
     Route::get('/taskDetail/{id}',[taskDetailsController::class, 'show'])->name('taskDetail');
     Route::post('/updateTask/{id}', [taskDetailsController::class, 'update'])->name('updateTask');
     Route::get('/completeTask/{id}',[ActiveTasksController::class, 'completeTask'])->name('completeTask');
+    Route::get('/uncheckTask/{id}',[ComplitedTaskController::class, 'uncheckTask'])->name('uncheckTask');
     Route::get('/deleteTask/{id}',[ComplitedTaskController::class, 'destroy'])->name('deleteTask');
 });
 

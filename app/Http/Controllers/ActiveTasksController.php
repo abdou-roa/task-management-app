@@ -71,6 +71,7 @@ class ActiveTasksController extends Controller
     {
         // add task name, user_id and task details
         $task = new Tasks;
+        $task->id = DB::table('tasks')->count()+1;
         $task->user_id = Auth::id();
         $task->task_name = $request->taskName;
         $task->task_details = $request->taskDetails;

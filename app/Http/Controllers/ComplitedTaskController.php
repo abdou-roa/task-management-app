@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tasks;
 use Illuminate\Http\Request;
 use App\Models\complitedTask;
 use Illuminate\Support\Facades\DB;
@@ -98,5 +99,17 @@ class ComplitedTaskController extends Controller
         $endedTask = complitedTask::find($id);
         $endedTask->delete();
         return redirect()->route('completedTasks');
+    }
+    public function uncheckTask($id){
+        $completedTask = complitedTask::find($id);
+        $recovredTask = new Tasks;
+        $recovredTask->id = $completedTask->id;
+        $recovredTask->user_id = Auth::id();
+        $recovredTask->task_name = $completedTask->task_name;
+        $recovredTask->task_details = $completedTask->task_details;
+        $recovredTask->is_completed = false;
+        $recovredTask->save();
+        $completedTask->delete();
+        return redirect()->route('home');
     }
 }

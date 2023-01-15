@@ -57,7 +57,7 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
                                     <div>                                        
-                                    <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                                        <a href="{{route('completeTask', $activeTask->id)}}"><input class="form-check-input me-2" type="checkbox" value="" aria-label="..." /></a>
                                         {{$activeTask->task_name}}</div>
                                         <a href="{{route("taskDetail", $activeTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
@@ -68,8 +68,9 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
                                         <div>                                        
-                                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$compliteTask->task_name}}</div>
+                                            <a href="{{route('uncheckTask', $compliteTask->id)}}"><input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked/></a>
+                                            <s>{{$compliteTask->task_name}}</s>
+                                        </div>
                                         <a href=" {{route("taskDetail", $compliteTask->id)}}" class="btn btn-secondary">details</a>
                                         </li>
                                     @endforeach
@@ -93,8 +94,9 @@
                                         <li class="list-group-item d-flex justify-content-between align-items-center border-0 mb-2 rounded"
                                         style="background-color: #f4f6f7;">
                                         <div>                                        
-                                        <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
-                                        {{$completedTask->task_name}} hello</div>
+                                            <a href="{{route('uncheckTask', $completedTask->id)}}"><input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked/></a>
+                                            <s>{{$completedTask->task_name}}</s>
+                                        </div>
                                         <div>
                                             <a href="{{route("taskDetail", $completedTask->id)}}" class="btn btn-secondary">details</a>
                                             <a href="{{route("deleteTask", $completedTask->id)}}" class="btn btn-danger">Delete</a>
