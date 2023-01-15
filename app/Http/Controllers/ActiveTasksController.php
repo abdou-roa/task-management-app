@@ -2,13 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Tasks;
 use Illuminate\Http\Request;
+use App\Models\complitedTask;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class ActiveTasksController extends Controller
 {
+    public function completeTask($id){
+        $task = Tasks::find($id);
+        $task->is_completed = !$task->is_completed;
+        $completed = new complitedTask;
+        $completed->id=$task->id;
+        $completed->user_id = $task->user_id;
+        $completed->task_name = $task->task_name;
+        $completed->task_details= $task->task_details;
+        $completed->is_completed = ! $task->is_completed;
+        $completed->completed_at = Carbon::now();
+        $task->delete();
+        $completed->save();
+        return redirect()->route('home');
+    }
     /**
      * Display a listing of the resource.
      *

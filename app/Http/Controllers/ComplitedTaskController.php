@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\complitedTask;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,6 @@ class ComplitedTaskController extends Controller
         //
         $completedTasks = DB::table('complited_tasks')
                                                     ->where('user_id', Auth::id())
-                                                    ->where('is_completed', true)
                                                     ->get();
 
         $all = false;
@@ -95,5 +95,8 @@ class ComplitedTaskController extends Controller
     public function destroy($id)
     {
         //
+        $endedTask = complitedTask::find($id);
+        $endedTask->delete();
+        return redirect()->route('completedTasks');
     }
 }

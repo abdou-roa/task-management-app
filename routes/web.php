@@ -27,9 +27,12 @@ Auth::routes();
 Route::middleware('auth')->group(function (){
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::get('/activeTasks', [ActiveTasksController::class, 'index']);
-    Route::get('/completedTasks', [ComplitedTaskController::class, 'index']);
+    Route::get('/completedTasks', [ComplitedTaskController::class, 'index'])->name('completedTasks');
     Route::get('/addTask',[ActiveTasksController::class, 'create'])->name('addTask');
     Route::post('/storeTask',[ActiveTasksController::class, 'store'])->name('storeTask');
     Route::get('/taskDetail/{id}',[taskDetailsController::class, 'show'])->name('taskDetail');
     Route::post('/updateTask/{id}', [taskDetailsController::class, 'update'])->name('updateTask');
+    Route::get('/completeTask/{id}',[ActiveTasksController::class, 'completeTask'])->name('completeTask');
+    Route::get('/deleteTask/{id}',[ComplitedTaskController::class, 'destroy'])->name('deleteTask');
 });
+
